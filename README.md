@@ -123,129 +123,60 @@ npm run build
 
 ### **Environment Configuration** 🔐
 
-This project uses **environment variables** to securely store API keys and sensitive configuration.
+Environment variables store API keys and secrets outside your code.
 
-#### **What Are Environment Variables?**
-Environment variables are key-value pairs stored outside your code that configure your application differently for development, testing, and production environments.
+#### **Quick Setup** 🛠️
 
-**Why use them?**
-- ✅ Keep API keys and secrets out of source code
-- ✅ Prevent accidental exposure in version control (Git)
-- ✅ Different configurations per environment (dev/staging/prod)
-- ✅ Easy to change without modifying code
-
-#### **Environment File Hierarchy** 📂
-
-Vite uses a hierarchy of `.env` files loaded in this order (priority from highest to lowest):
-
-```
-.env.production.local   # Production-specific secrets (ignored by Git)
-.env.production         # Production defaults (can be committed)
-.env.local              # Local overrides for any mode (ignored by Git)
-.env.development.local  # Development-specific secrets (ignored by Git)
-.env.development        # Development defaults (can be committed)
-.env                    # Shared defaults (gitignored for this project)
-.env.example            # Template file (committed to Git)
-```
-
-**Which file to use:**
-- **`.env`** - Your actual API keys (gitignored, not committed)
-- **`.env.example`** - Template showing what variables are needed (committed to Git)
-- **`.env.local`** - Personal overrides that shouldn't be shared
-- **`.env.production`** - Production-specific values (deployed separately)
-
-#### **Setup Steps** 🛠️
-
-1. **Copy the example file:**
+1. **Copy template:**
    ```bash
-   cp .env.example .env
+   cp .env.example .env.local
    ```
 
 2. **Add your Unsplash API key:**
-   - Open `.env` file
-   - Replace `your_access_key_here` with your actual key
-   - Get keys at: [unsplash.com/developers](https://unsplash.com/developers)
-
-3. **Your `.env` file should look like:**
    ```bash
-   VITE_UNSPLASH_ACCESS_KEY=InvQazTPi12cP2GMq1Kg8LXqXzlCCxCOMXSFtklExX8
+   # .env.local (or .env)
+   VITE_UNSPLASH_ACCESS_KEY=your_actual_key_here
    ```
+   Get free API key: [unsplash.com/developers](https://unsplash.com/developers)
 
-4. **Restart dev server** (environment variables load at build time):
+3. **Restart dev server:**
    ```bash
    npm run dev
    ```
 
-#### **How It Works** ⚙️
+#### **Environment Files** 📂
 
-**In Vite, environment variables must be prefixed with `VITE_`** to be exposed to your code:
+```
+.env.development    # Development defaults (can be committed)
+.env.production     # Production defaults (can be committed)
+.env.local          # Your actual keys (gitignored - use this!)
+.env.example        # Template (committed)
+```
 
+**Best practice:**
+- Use **`.env.local`** for your actual API keys (never committed)
+- Use **`.env.development`** / **`.env.production`** for environment-specific defaults
+- Always commit **`.env.example`** as a template
+
+#### **Usage** ⚙️
+
+**Vite requires `VITE_` prefix:**
 ```typescript
-// ❌ Won't work - no VITE_ prefix
-const key = import.meta.env.UNSPLASH_KEY;
-
-// ✅ Works - has VITE_ prefix
+// ✅ Correct
 const key = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
+
+// ❌ Won't work
+const key = import.meta.env.UNSPLASH_KEY;
 ```
 
-**In your code** ([src/services/unsplashService.ts](src/services/unsplashService.ts)):
+**TypeScript types** ([src/vite-env.d.ts](src/vite-env.d.ts)):
 ```typescript
-// Access environment variable
-const UNSPLASH_ACCESS_KEY = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
-
-// Validate it exists
-if (!UNSPLASH_ACCESS_KEY) {
-  console.warn("⚠️ API key not found. Add it to .env file.");
-}
-
-// Use in API calls
-headers: {
-  'Authorization': `Client-ID ${UNSPLASH_ACCESS_KEY}`,
-}
-```
-
-#### **Security Best Practices** 🔒
-
-1. **Never commit `.env` files** with real secrets to Git
-   - Already configured in `.gitignore`
-
-2. **Always commit `.env.example`** as a template for others
-
-3. **Use different keys** for development and production
-
-4. **For production deployments:**
-   - Set environment variables in your hosting platform (Vercel, Netlify, etc.)
-   - Don't include `.env` files in deployment
-
-5. **Rotate keys regularly** if they're exposed
-
-#### **Common Issues** 🐛
-
-**Problem:** "API key not working"
-- **Solution:** Make sure you restarted `npm run dev` after creating `.env`
-
-**Problem:** "undefined" when accessing env var
-- **Solution:** Check that variable name has `VITE_` prefix
-
-**Problem:** "Still getting 401 errors"
-- **Solution:** Verify the API key is correct in `.env` and valid on Unsplash
-
-#### **TypeScript Support** 📝
-
-Add type definitions for your environment variables:
-
-```typescript
-// src/vite-env.d.ts
 interface ImportMetaEnv {
   readonly VITE_UNSPLASH_ACCESS_KEY: string;
 }
-
-interface ImportMeta {
-  readonly env: ImportMetaEnv;
-}
 ```
 
-Now you get autocomplete and type checking for environment variables!
+**🔒 Security:** Never commit `.env.local` or files with real keys. For production, set env vars in your hosting platform (Vercel, Netlify, etc.).
 
 ---
 
@@ -254,18 +185,17 @@ Now you get autocomplete and type checking for environment variables!
 ### **1. Data Flow** 📊
 
 ```
-User Action → Hook → Service → State Update → UI Re-render
+Click Heart → Hook (logic) → Service (CRUD) → Update State → UI Updates
 ```
 
 **Example: Adding a Favorite**
-1. User clicks heart icon on a wallpaper
-2. `WallpapersPage` component calls `toggleFavorite()`
-3. Hook calls `addToFavorites()` from `useFavorites` hook
-4. Hook calls `favoritesService.addFavorite()`
-5. Service creates new favorite object
-6. Hook updates state with new favorite
-7. React re-renders UI with heart filled
-8. Hook saves to localStorage automatically
+1. **User clicks** heart icon 💗
+2. **Hook processes** the action with `useFavorites`
+3. **Service handles** the data with `favoritesService.addFavorite()`
+4. **State updates** and React re-renders the UI automatically
+5. **Saved** to localStorage for persistence
+
+This pattern keeps your components clean—they just call functions, and hooks + services handle the complexity.
 
 ### **2. Custom Hooks Explained** 🪝
 
@@ -281,11 +211,7 @@ const removeFavorite = (id) => { /* logic here */ };
 const { favorites, addToFavorites, removeFromFavorites, isFavorited, stats } = useFavorites();
 ```
 
-**Benefits:**
-- ✅ Logic is reusable across components
-- ✅ Auto-saves to localStorage
-- ✅ Provides calculated stats
-- ✅ Cleaner component code
+**Benefits:** Reusable logic across components, auto-saves to localStorage, cleaner component code.
 
 #### **`useTheme` Hook** ([src/hooks/useTheme.ts](src/hooks/useTheme.ts))
 
@@ -324,11 +250,7 @@ favoritesService.getFavoritesStats(favorites)
 favoritesService.saveFavorites(favorites)
 ```
 
-**Why separate services?**
-- 🔄 Easy to swap localStorage for API calls
-- 🧪 Easier to test business logic
-- 📖 Clear separation of concerns
-- 🔧 Reusable across different UIs
+**Why separate services?** Easy to swap localStorage for API calls later, and reusable across different UIs.
 
 ---
 
@@ -369,11 +291,7 @@ export const routes: RouteObject[] = [
 ];
 ```
 
-**Benefits:**
-- ✅ All routes in one central location
-- ✅ Easy to see app structure at a glance
-- ✅ Simple to add new routes
-- ✅ Type-safe with TypeScript
+**Benefits:** Centralized route configuration, easy to see app structure, type-safe.
 
 #### **2. Router Setup** ([src/App.tsx](src/App.tsx))
 
@@ -657,14 +575,7 @@ function WallpaperDetailPage() {
 
 ### **What is TanStack Query?** 📡
 
-TanStack Query (formerly React Query) is a powerful library for fetching, caching, and updating server data in React applications. It eliminates the need to manage loading states, errors, and cache manually.
-
-**Benefits:**
-- ✅ Automatic caching and background refetching
-- ✅ Built-in loading and error states
-- ✅ Request deduplication
-- ✅ Optimistic updates
-- ✅ Pagination and infinite scroll support
+TanStack Query (formerly React Query) is a library for fetching, caching, and updating server data. Automatically handles loading states, errors, caching, and background refetching.
 
 ### **Setup** 🔧
 
@@ -919,20 +830,7 @@ Our wallpapers page demonstrates full CRUD functionality with favorites stored i
 
 ### **Why localStorage?** 🗄️
 
-`localStorage` is a browser API that stores data locally on the user's device:
-
-**Benefits:**
-- ✅ Data persists across browser sessions
-- ✅ No backend/database required
-- ✅ Perfect for learning CRUD patterns
-- ✅ Instant read/write (synchronous)
-- ✅ 5-10MB storage limit per domain
-
-**Limitations:**
-- ❌ Data only on one device
-- ❌ No sync across devices
-- ❌ Can be cleared by user
-- ❌ Not suitable for sensitive data
+`localStorage` is a browser API that stores data locally. Data persists across sessions, requires no backend, perfect for learning CRUD patterns. Limitations: device-specific, can be cleared by user.
 
 ### **Complete CRUD Implementation** 🚀
 
@@ -1015,11 +913,7 @@ export const saveFavorites = (favorites: FavoriteWallpaper[]): void => {
 };
 ```
 
-**Key Patterns:**
-- ✅ **Immutable updates** - Return new arrays, never mutate
-- ✅ **Pure functions** - No side effects in return values
-- ✅ **Error handling** - Try/catch for localStorage operations
-- ✅ **TypeScript types** - Full type safety
+**Key Patterns:** Immutable updates (return new arrays), pure functions, error handling with try/catch, full TypeScript types.
 
 #### **2. Hook Layer - State Management** 🪝
 
