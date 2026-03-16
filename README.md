@@ -1,36 +1,6 @@
-# Wallpapers Gallery — Learn Modern React Development
+# Wallpapers Gallery 
 
 > A production-ready application built with React, TypeScript, TanStack Query, and modern best practices. Features a **wallpapers gallery with full CRUD operations** using the Unsplash API - browse beautiful wallpapers, save favorites, add notes, and persist data with localStorage. Perfect for learning professional front-end development!
-
-## What You'll Learn
-
-### **Core React Concepts**
-- **State Management** - `useState` and custom hooks
-- **Effects** - `useEffect` for side effects (localStorage, DOM manipulation)
-- **Component Composition** - Breaking UI into reusable pieces
-- **Props & TypeScript** - Type-safe component interfaces
-- **Controlled Components** - Form handling with React
-- **React Router** - Client-side routing and navigation
-- **Data Fetching** - TanStack Query for server state management
-
-### **Modern Architecture**
-- **Clean Architecture** - Separation of concerns (UI, logic, data)
-- **Custom Hooks** - Reusable stateful logic
-- **Service Layer** - Business logic separated from UI
-- **Data Layer** - Centralized data management
-- **Component Library** - shadcn/ui components with Tailwind
-
-### **Professional Patterns**
-- **localStorage Persistence** - Favorites survive page refresh
-- **CRUD Operations** - Complete Create, Read, Update, Delete with favorites
-- **Dark Mode** - Complete theme system
-- **Responsive Design** - Sidebar layout with mobile support
-- **Accessibility** - ARIA labels and semantic HTML
-- **TypeScript** - Full type safety
-- **Environment Variables** - Secure API key management
-- **API Integration** - Fetch data from Unsplash API
-
----
 
 ## Architecture Overview
 
@@ -1451,6 +1421,3 @@ MIT - Use this for learning and build awesome things!
 
 ---
 
-**Happy Learning! 🎉**
-
-*Remember: The best way to learn is by doing. Try modifying the code, adding features, and breaking things!*
