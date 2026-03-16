@@ -32,6 +32,14 @@
 
 ---
 
+## Architecture Overview
+
+![Wallpapers Gallery Architecture](./docs/architecture-mindmap.png)
+
+*Visual overview of the application architecture showing the relationship between Core Technologies, Modern Architecture patterns, UI Layer, CRUD Operations, and Key Features.*
+
+---
+
 ## Project Structure
 
 ```
