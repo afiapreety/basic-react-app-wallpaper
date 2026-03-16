@@ -1,68 +1,68 @@
-# �️ Wallpapers Gallery — Learn Modern React Development
+# Wallpapers Gallery — Learn Modern React Development
 
 > A production-ready application built with React, TypeScript, TanStack Query, and modern best practices. Features a **wallpapers gallery with full CRUD operations** using the Unsplash API - browse beautiful wallpapers, save favorites, add notes, and persist data with localStorage. Perfect for learning professional front-end development!
 
-## 🎯 What You'll Learn
+## What You'll Learn
 
 ### **Core React Concepts**
-- ✅ **State Management** - `useState` and custom hooks
-- ✅ **Effects** - `useEffect` for side effects (localStorage, DOM manipulation)
-- ✅ **Component Composition** - Breaking UI into reusable pieces
-- ✅ **Props & TypeScript** - Type-safe component interfaces
-- ✅ **Controlled Components** - Form handling with React
-- ✅ **React Router** - Client-side routing and navigation
-- ✅ **Data Fetching** - TanStack Query for server state management
+- **State Management** - `useState` and custom hooks
+- **Effects** - `useEffect` for side effects (localStorage, DOM manipulation)
+- **Component Composition** - Breaking UI into reusable pieces
+- **Props & TypeScript** - Type-safe component interfaces
+- **Controlled Components** - Form handling with React
+- **React Router** - Client-side routing and navigation
+- **Data Fetching** - TanStack Query for server state management
 
 ### **Modern Architecture**
-- 🏗️ **Clean Architecture** - Separation of concerns (UI, logic, data)
-- 🪝 **Custom Hooks** - Reusable stateful logic
-- ⚙️ **Service Layer** - Business logic separated from UI
-- 📦 **Data Layer** - Centralized data management
-- 🎨 **Component Library** - shadcn/ui components with Tailwind
+- **Clean Architecture** - Separation of concerns (UI, logic, data)
+- **Custom Hooks** - Reusable stateful logic
+- **Service Layer** - Business logic separated from UI
+- **Data Layer** - Centralized data management
+- **Component Library** - shadcn/ui components with Tailwind
 
 ### **Professional Patterns**
-- 💾 **localStorage Persistence** - Favorites survive page refresh
-- ✏️ **CRUD Operations** - Complete Create, Read, Update, Delete with favorites
-- 🌗 **Dark Mode** - Complete theme system
-- 📱 **Responsive Design** - Sidebar layout with mobile support
-- ♿ **Accessibility** - ARIA labels and semantic HTML
-- 📝 **TypeScript** - Full type safety
-- 🔐 **Environment Variables** - Secure API key management
-- 🖼️ **API Integration** - Fetch data from Unsplash API
+- **localStorage Persistence** - Favorites survive page refresh
+- **CRUD Operations** - Complete Create, Read, Update, Delete with favorites
+- **Dark Mode** - Complete theme system
+- **Responsive Design** - Sidebar layout with mobile support
+- **Accessibility** - ARIA labels and semantic HTML
+- **TypeScript** - Full type safety
+- **Environment Variables** - Secure API key management
+- **API Integration** - Fetch data from Unsplash API
 
 ---
 
-## 📚 Project Structure Explained
+## Project Structure
 
 ```
-todo-app/
-├── 📄 .env                       # Environment variables (API keys) - NOT committed
-├── 📄 .env.example               # Template for environment variables - committed
-├── 📄 .gitignore                 # Files to exclude from Git
-├── 📄 index.html                 # HTML entry point
-├── 📄 package.json               # Dependencies and scripts
-├── 📄 tsconfig.json              # TypeScript configuration
-├── 📄 tailwind.config.js         # Tailwind CSS configuration
-├── 📄 vite.config.js             # Vite build tool configuration
-├── 📄 postcss.config.js          # PostCSS configuration
-├── 📄 README.md                  # Documentation (this file)
+basic-react-app-wallpaper/
+├── .env                       # Environment variables (API keys) - NOT committed
+├── .env.example               # Template for environment variables - committed
+├── .gitignore                 # Files to exclude from Git
+├── index.html                 # HTML entry point
+├── package.json               # Dependencies and scripts
+├── tsconfig.json              # TypeScript configuration
+├── tailwind.config.js         # Tailwind CSS configuration
+├── vite.config.js             # Vite build tool configuration
+├── postcss.config.js          # PostCSS configuration
+├── README.md                  # Documentation (this file)
 │
 src/
-├── 📄 App.tsx                    # Main application component (routing setup)
-├── 📄 main.tsx                   # Entry point - React app initialization
-├── 📄 index.css                  # Global styles + Tailwind directives
-├── 📄 vite-env.d.ts              # TypeScript definitions for environment variables
+├── App.tsx                    # Main application component (routing setup)
+├── main.tsx                   # Entry point - React app initialization
+├── index.css                  # Global styles + Tailwind directives
+├── vite-env.d.ts              # TypeScript definitions for environment variables
 │
-├── 📁 pages/                     # Page Components (Routes)
+├── pages/                     # Page Components (Routes)
 │   ├── HomePage.tsx              # Landing page (/)
 │   ├── WallpapersPage.tsx        # Wallpapers gallery (/wallpapers)
 │   ├── SettingsPage.tsx          # Settings and theme (/settings)
 │   └── index.ts                  # Page exports
 │
-├── 📁 routes/                    # Routing Configuration
+├── routes/                    # Routing Configuration
 │   └── index.tsx                 # Route definitions
 │
-├── 📁 components/                # UI Components
+├── components/                # UI Components
 │   └── ui/                       # shadcn/ui components
 │       ├── layouts/              # Layout components
 │       │   ├── Header.tsx        # Top navigation bar
@@ -72,26 +72,26 @@ src/
 │       ├── card.tsx              # Card container components
 │       └── badge.jsx             # Status badges
 │
-├── 📁 hooks/                     # Custom React Hooks
+├── hooks/                     # Custom React Hooks
 │   ├── useTheme.ts               # Dark mode theme management
 │   ├── useFavorites.ts           # Wallpaper favorites CRUD + localStorage
 │   └── index.ts                  # Hook exports
 │
-├── 📁 services/                  # Business Logic Layer
+├── services/                  # Business Logic Layer
 │   ├── unsplashService.ts        # Unsplash API integration (uses env vars)
 │   ├── favoritesService.ts       # Favorites CRUD + localStorage persistence
 │   └── index.ts                  # Service exports
 │
-├── 📁 types/                     # TypeScript Type Definitions
+├── types/                     # TypeScript Type Definitions
 │   └── index.ts                  # All interfaces and types
 │
-└── 📁 lib/                       # Utility Functions
+└── lib/                       # Utility Functions
     └── utils.js                  # Helper functions (cn for classes)
 ```
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### **Prerequisites**
 - Node.js installed (v16 or higher)
@@ -121,11 +121,11 @@ npm run dev
 npm run build
 ```
 
-### **Environment Configuration** 🔐
+### **Environment Configuration**
 
 Environment variables store API keys and secrets outside your code.
 
-#### **Quick Setup** 🛠️
+#### **Quick Setup**
 
 1. **Copy template:**
    ```bash
@@ -144,7 +144,7 @@ Environment variables store API keys and secrets outside your code.
    npm run dev
    ```
 
-#### **Environment Files** 📂
+#### **Environment Files**
 
 ```
 .env.development    # Development defaults (can be committed)
@@ -158,7 +158,7 @@ Environment variables store API keys and secrets outside your code.
 - Use **`.env.development`** / **`.env.production`** for environment-specific defaults
 - Always commit **`.env.example`** as a template
 
-#### **Usage** ⚙️
+#### **Usage**
 
 **Vite requires `VITE_` prefix:**
 ```typescript
@@ -176,20 +176,20 @@ interface ImportMetaEnv {
 }
 ```
 
-**🔒 Security:** Never commit `.env.local` or files with real keys. For production, set env vars in your hosting platform (Vercel, Netlify, etc.).
+**Security:** Never commit `.env.local` or files with real keys. For production, set env vars in your hosting platform (Vercel, Netlify, etc.).
 
 ---
 
-## 🧩 Understanding the Architecture
+## Understanding the Architecture
 
-### **1. Data Flow** 📊
+### **1. Data Flow**
 
 ```
 Click Heart → Hook (logic) → Service (CRUD) → Update State → UI Updates
 ```
 
 **Example: Adding a Favorite**
-1. **User clicks** heart icon 💗
+1. **User clicks** heart icon
 2. **Hook processes** the action with `useFavorites`
 3. **Service handles** the data with `favoritesService.addFavorite()`
 4. **State updates** and React re-renders the UI automatically
@@ -197,7 +197,7 @@ Click Heart → Hook (logic) → Service (CRUD) → Update State → UI Updates
 
 This pattern keeps your components clean—they just call functions, and hooks + services handle the complexity.
 
-### **2. Custom Hooks Explained** 🪝
+### **2. Custom Hooks**
 
 #### **`useFavorites` Hook** ([src/hooks/useFavorites.ts](src/hooks/useFavorites.ts))
 
@@ -225,7 +225,7 @@ const { isDark, toggleTheme } = useTheme();
 - Persists preference to localStorage
 - Provides helper methods
 
-### **3. Service Layer** ⚙️
+### **3. Service Layer**
 
 The `favoritesService` ([src/services/favoritesService.ts](src/services/favoritesService.ts)) contains all business logic:
 
@@ -254,9 +254,9 @@ favoritesService.saveFavorites(favorites)
 
 ---
 
-## 🛣️ Routing with React Router
+## Routing with React Router
 
-### **What is Routing?** 🗺️
+### **What is Routing?**
 
 Routing allows you to navigate between different views (pages) in your app without full page reloads. We use **React Router** to create a single-page application (SPA) with multiple pages.
 
@@ -455,7 +455,7 @@ export function SettingsPage() {
 }
 ```
 
-### **Adding a New Route** 🆕
+### **Adding a New Route**
 
 **Step 1: Create Page Component**
 ```bash
@@ -511,7 +511,7 @@ export const routes: RouteObject[] = [
 </NavLink>
 ```
 
-### **Programmatic Navigation** 🧭
+### **Programmatic Navigation**
 
 Sometimes you need to navigate from code (not a link):
 
@@ -530,7 +530,7 @@ function MyComponent() {
 }
 ```
 
-### **Route Parameters** 🔢
+### **Route Parameters**
 
 For dynamic routes (e.g., viewing a specific wallpaper):
 
@@ -551,7 +551,7 @@ function WallpaperDetailPage() {
 }
 ```
 
-### **Routing Best Practices** ✅
+### **Routing Best Practices**
 
 1. **Centralize routes** - Keep all routes in `routes/index.tsx`
 2. **One page per route** - Each route should have its own page component
@@ -571,13 +571,13 @@ function WallpaperDetailPage() {
 
 ---
 
-## � Data Fetching with TanStack Query
+## Data Fetching with TanStack Query
 
-### **What is TanStack Query?** 📡
+### **What is TanStack Query?**
 
 TanStack Query (formerly React Query) is a library for fetching, caching, and updating server data. Automatically handles loading states, errors, caching, and background refetching.
 
-### **Setup** 🔧
+### **Setup**
 
 #### **1. Install TanStack Query**
 ```bash
@@ -608,7 +608,7 @@ createRoot(rootElement).render(
 );
 ```
 
-### **Real-World Example: Wallpapers Gallery** 🖼️
+### **Real-World Example: Wallpapers Gallery**
 
 The Wallpapers page demonstrates fetching data from the Unsplash API using TanStack Query.
 
@@ -722,7 +722,7 @@ const { data, isLoading, isError, error, refetch, isFetching } = useQuery({
 | `error` | `Error \| null` | Error object if query failed. |
 | `refetch` | `() => void` | Manually trigger a refetch. |
 
-### **Query States** 📊
+### **Query States**
 
 TanStack Query manages three main states:
 
@@ -737,7 +737,7 @@ if (isError) return <Error message={error.message} />;
 if (data) return <DisplayData data={data} />;
 ```
 
-### **Advanced Features** 🚀
+### **Advanced Features**
 
 #### **Background Refetching**
 ```typescript
@@ -788,7 +788,7 @@ const handleDelete = () => {
 | Server data that changes | TanStack Query | Auto-refresh, cache management |
 | Global app state | Context + useState | Shared across components |
 
-### **Best Practices** ✅
+### **Best Practices**
 
 1. **Use descriptive query keys**
    ```typescript
@@ -815,9 +815,9 @@ const handleDelete = () => {
 
 ---
 
-## 💾 CRUD Operations with localStorage
+## CRUD Operations with localStorage
 
-### **What Are CRUD Operations?** 📝
+### **What Are CRUD Operations?**
 
 CRUD stands for **Create, Read, Update, Delete** - the four basic operations for managing data:
 
@@ -828,11 +828,11 @@ CRUD stands for **Create, Read, Update, Delete** - the four basic operations for
 
 Our wallpapers page demonstrates full CRUD functionality with favorites stored in `localStorage`.
 
-### **Why localStorage?** 🗄️
+### **Why localStorage?**
 
 `localStorage` is a browser API that stores data locally. Data persists across sessions, requires no backend, perfect for learning CRUD patterns. Limitations: device-specific, can be cleared by user.
 
-### **Complete CRUD Implementation** 🚀
+### **Complete CRUD Implementation**
 
 #### **Architecture Overview**
 
@@ -845,7 +845,7 @@ User Action → Hook → Service → localStorage → State Update → UI
 2. **Hook Layer** ([src/hooks/useFavorites.ts](src/hooks/useFavorites.ts)) - State management
 3. **UI Layer** ([src/pages/WallpapersPage.tsx](src/pages/WallpapersPage.tsx)) - User interface
 
-#### **1. Service Layer - Business Logic** ⚙️
+#### **1. Service Layer - Business Logic**
 
 ```typescript
 // src/services/favoritesService.ts
@@ -1148,7 +1148,7 @@ export const loadFavorites = async () => {
 
 **Only the service layer changes** - that's the power of this architecture.
 
-### **Resources** 📚
+### **Resources**
 
 - [TanStack Query Docs](https://tanstack.com/query/latest) - Official documentation
 - [Unsplash API](https://unsplash.com/developers) - Get API key for production
@@ -1156,7 +1156,7 @@ export const loadFavorites = async () => {
 
 ---
 
-## �🎨 Component Breakdown
+## Component Breakdown
 
 ### **App.tsx** - Main Container
 ```typescript
@@ -1196,7 +1196,7 @@ export const loadFavorites = async () => {
 
 ---
 
-## 🧠 React Patterns Used
+## React Patterns Used
 
 ### **1. Immutable State Updates**
 
@@ -1255,7 +1255,7 @@ const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
 
 ---
 
-## 🎓 Learning Path for Beginners
+## Learning Path for Beginners
 
 ### **Level 1: Understanding the Basics**
 1. Start with [src/main.tsx](src/main.tsx) - See how React mounts and QueryClient setup
@@ -1297,7 +1297,7 @@ const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
 
 ---
 
-## 💡 Common Questions
+## Common Questions
 
 ### **Q: Why TypeScript?**
 A: Type safety catches bugs before runtime and provides better IDE support with autocomplete.
@@ -1340,7 +1340,7 @@ A: Without an API key, Unsplash limits requests. For production, get a free API 
 
 ---
 
-## 🛠️ Extending This App
+## Extending This App
 
 ### **Add New Features**
 - [ ] Add wallpaper search functionality by keyword
@@ -1415,7 +1415,7 @@ npm install -D vitest @testing-library/react
 
 ---
 
-## 📖 Additional Resources
+## Additional Resources
 
 - [React Docs](https://react.dev/) - Official React documentation
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/) - Learn TypeScript
@@ -1427,7 +1427,7 @@ npm install -D vitest @testing-library/react
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 This is a learning project! Feel free to:
 1. Fork it
@@ -1437,9 +1437,9 @@ This is a learning project! Feel free to:
 
 ---
 
-## 📝 License
+## License
 
-MIT - Use this for learning and build awesome things! 🚀
+MIT - Use this for learning and build awesome things!
 
 ---
 
