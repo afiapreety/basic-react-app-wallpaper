@@ -1,5 +1,5 @@
 import { RouteObject } from "react-router-dom";
-import { HomePage, SettingsPage, WallpapersPage } from "@/pages";
+import { HomePage, SettingsPage, WallpapersPage, WallpaperDetailPage } from "@/pages";
 
 /**
  * Application route configuration
@@ -17,6 +17,11 @@ export const routes: RouteObject[] = [
   {
     path: "/wallpapers",
     element: <WallpapersPage />,
+  },
+  {
+    // Dynamic route — :id is a URL parameter read with useParams()
+    path: "/wallpapers/:id",
+    element: <WallpaperDetailPage />,
   },
   {
     path: "/settings",

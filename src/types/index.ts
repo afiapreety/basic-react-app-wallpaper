@@ -1,37 +1,47 @@
 
-export interface Todo {
-  id: number;
-  text: string;
-  done: boolean;
+/**
+ * Wallpaper Types
+ * Types for the wallpaper application
+ */
+
+export interface Wallpaper {
+  id: string;
+  urls: {
+    raw: string;
+    full: string;
+    regular: string;
+    small: string;
+    thumb: string;
+  };
+  alt_description: string | null;
+  description: string | null;
+  user: {
+    name: string;
+    username: string;
+    profile_image: {
+      small: string;
+      medium: string;
+      large: string;
+    };
+  };
+  links: {
+    html: string;
+  };
 }
 
+export interface FavoriteWallpaper {
+  id: string;
+  photo: Wallpaper;
+  savedAt: string; // ISO timestamp
+  notes?: string; // Optional user notes
+}
+
+export interface WallpaperStats {
+  total: number;
+  recentlySaved: number;
+}
 
 export interface ThemeToggleProps {
   dark: boolean;
   onToggle: () => void;
-}
-
-export interface TodoStatsProps {
-  doneCount: number;
-  totalCount: number;
-}
-
-export interface TodoInputProps {
-  value: string;
-  onChange: (value: string) => void;
-  onAdd: () => void;
-}
-
-export interface TodoItemProps {
-  todo: Todo;
-  onToggle: (id: number) => void;
-  onUpdate: (id: number, text: string) => void;
-  onDelete: (id: number) => void;
-}
-
-export interface TodoListProps {
-  todos: Todo[];
-  onToggle: (id: number) => void;
-  onUpdate: (id: number, text: string) => void;
-  onDelete: (id: number) => void;
 }

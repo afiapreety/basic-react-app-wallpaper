@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchWallpapers, UnsplashPhoto } from "@/services";
 import { useFavorites } from "@/hooks";
@@ -23,6 +24,7 @@ import {
  * Demonstrates TanStack Query for data fetching and CRUD operations with localStorage
  */
 export function WallpapersPage() {
+  const navigate = useNavigate();
   const [editingNotes, setEditingNotes] = useState<string | null>(null);
   const [noteText, setNoteText] = useState("");
 
@@ -150,12 +152,13 @@ export function WallpapersPage() {
                     key={photo.id}
                     className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 bg-gray-100 dark:bg-gray-800"
                   >
-                    {/* Image */}
+                    {/* Image — click navigates to detail page */}
                     <img
                       src={photo.urls.small}
                       alt={photo.alt_description || photo.description || "Wallpaper"}
-                      className="w-full h-64 object-cover"
+                      className="w-full h-64 object-cover cursor-pointer"
                       loading="lazy"
+                      onClick={() => navigate(`/wallpapers/${photo.id}`)}
                     />
 
                     {/* Favorite Button (always visible) */}
@@ -185,15 +188,23 @@ export function WallpapersPage() {
                             {photo.description || photo.alt_description}
                           </p>
                         )}
-                        <a
-                          href={photo.links.html}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-xs text-blue-300 hover:text-blue-200 underline"
-                        >
-                          View on Unsplash
-                          <ExternalLink className="h-3 w-3" />
-                        </a>
+                        <div className="flex items-center gap-3">
+                          <button
+                            onClick={() => navigate(`/wallpapers/${photo.id}`)}
+                            className="text-xs text-green-300 hover:text-green-200 underline"
+                          >
+                            View Details →
+                          </button>
+                          <a
+                            href={photo.links.html}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-xs text-blue-300 hover:text-blue-200 underline"
+                          >
+                            View on Unsplash
+                            <ExternalLink className="h-3 w-3" />
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>

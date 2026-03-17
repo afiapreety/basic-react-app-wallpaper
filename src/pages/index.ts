@@ -2,3 +2,4 @@
 export { default as HomePage } from "./HomePage";
 export { default as SettingsPage } from "./SettingsPage";
 export { WallpapersPage } from "./WallpapersPage";
+export { WallpaperDetailPage } from "./WallpaperDetailPage";
