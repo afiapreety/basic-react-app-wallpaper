@@ -3,17 +3,24 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchWallpapers, UnsplashPhoto } from "@/services";
 import { useFavorites } from "@/hooks";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, ExternalLink, Heart } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+// ✅ Import the three components we extracted — each demonstrates a prop pattern
+import { WallpaperImage } from "@/components/WallpaperImage";
+import { WallpaperInfo } from "@/components/WallpaperInfo";
+import { WallpaperActions } from "@/components/WallpaperActions";
 
 /**
- * WallpaperDetailPage — Dynamic route demo: /wallpapers/:id
+ * WallpaperDetailPage — Prop Passing Demo
  *
- * Key concept: useParams()
- *   - Reads the :id segment from the URL.
- *   - e.g. navigating to /wallpapers/abc123 gives  { id: "abc123" }
+ * This page is the PARENT. It owns state and data, then passes pieces
+ * down to child components as props. Three patterns are shown:
  *
- * We reuse the cached gallery query so no extra network request is needed.
+ *   1. Primitive props  → <WallpaperImage src="..." alt="..." />
+ *   2. Object prop      → <WallpaperInfo wallpaper={wallpaper} />
+ *   3. Callback prop    → <WallpaperActions onToggleFavorite={...} />
+ *
+ * Rule of thumb: data flows DOWN (parent → child via props).
+ *                events flow UP  (child → parent via callback props).
  */
 export function WallpaperDetailPage() {
   // ✅ useParams reads the dynamic :id segment from the URL
@@ -63,61 +70,31 @@ export function WallpaperDetailPage() {
         <ArrowLeft className="w-4 h-4 mr-2" /> Back to Gallery
       </Button>
 
-      {/* URL param info — learning callout */}
-      <div className="mb-6 p-4 rounded-lg border border-blue-200 bg-blue-50 dark:bg-blue-950 dark:border-blue-800 text-sm">
-        <p className="font-semibold text-blue-700 dark:text-blue-300 mb-1">
-          📚 Dynamic Route: <code className="font-mono">/wallpapers/:id</code>
-        </p>
-        <p className="text-blue-600 dark:text-blue-400">
-          Current URL param →{" "}
-          <code className="font-mono font-bold">{id}</code>
-          {" "}(read with <code className="font-mono">useParams()</code>)
-        </p>
+      {/* Prop passing callout */}
+      <div className="mb-6 p-4 rounded-lg border border-green-200 bg-green-50 dark:bg-green-950 dark:border-green-800 text-sm space-y-1">
+        <p className="font-semibold text-green-700 dark:text-green-300">📚 Prop Passing — this page is the parent</p>
+        <p className="text-green-600 dark:text-green-400">1️⃣ <code className="font-mono">WallpaperImage</code> — primitive props: <code className="font-mono">src</code>, <code className="font-mono">alt</code></p>
+        <p className="text-green-600 dark:text-green-400">2️⃣ <code className="font-mono">WallpaperInfo</code> — object prop: <code className="font-mono">wallpaper</code></p>
+        <p className="text-green-600 dark:text-green-400">3️⃣ <code className="font-mono">WallpaperActions</code> — callback prop: <code className="font-mono">onToggleFavorite</code></p>
       </div>
 
-      {/* Wallpaper image */}
-      <div className="rounded-xl overflow-hidden shadow-lg mb-6">
-        <img
-          src={wallpaper.urls.regular}
-          alt={wallpaper.alt_description ?? "Wallpaper"}
-          className="w-full object-cover max-h-[480px]"
-        />
-      </div>
+      {/* ✅ Pattern 1: Primitive props — passing plain string values */}
+      <WallpaperImage
+        src={wallpaper.urls.regular}
+        alt={wallpaper.alt_description ?? "Wallpaper"}
+      />
 
-      {/* Details */}
+      {/* Details row */}
       <div className="flex flex-wrap items-start justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
-            {wallpaper.description ?? wallpaper.alt_description ?? "Untitled"}
-          </h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-            Photo by{" "}
-            <span className="font-medium text-slate-700 dark:text-slate-300">
-              {wallpaper.user.name}
-            </span>
-          </p>
-          <Badge variant="outline" className="mt-2 font-mono text-xs">
-            id: {wallpaper.id}
-          </Badge>
-        </div>
+        {/* ✅ Pattern 2: Object prop — passing the whole wallpaper object */}
+        <WallpaperInfo wallpaper={wallpaper} />
 
-        <div className="flex gap-3">
-          <Button
-            variant={favorited ? "default" : "outline"}
-            onClick={() => toggleFavorite(wallpaper)}
-          >
-            <Heart className={`w-4 h-4 mr-2 ${favorited ? "fill-current" : ""}`} />
-            {favorited ? "Saved" : "Save"}
-          </Button>
-          <a
-            href={wallpaper.links.html}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-input bg-background text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors"
-          >
-            <ExternalLink className="w-4 h-4" /> View on Unsplash
-          </a>
-        </div>
+        {/* ✅ Pattern 3: Callback prop — parent owns state, child just calls the function */}
+        <WallpaperActions
+          wallpaper={wallpaper}
+          favorited={favorited}
+          onToggleFavorite={() => toggleFavorite(wallpaper)}
+        />
       </div>
     </div>
   );
